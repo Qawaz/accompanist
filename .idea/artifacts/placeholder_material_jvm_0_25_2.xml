@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="placeholder-material-jvm-0.25.2">
+    <output-path>$PROJECT_DIR$/placeholder-material/build/libs</output-path>
+    <root id="archive" name="placeholder-material-jvm-0.25.2.jar">
+      <element id="module-output" name="accompanist.placeholder-material.jvmMain" />
+    </root>
+  </artifact>
+</component>

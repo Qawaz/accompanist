@@ -1,7 +1,7 @@
 import com.vanniktech.maven.publish.MavenPublishPluginExtension
 import com.vanniktech.maven.publish.SonatypeHost
-import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
-import org.jetbrains.dokka.gradle.DokkaTaskPartial
+//import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
+//import org.jetbrains.dokka.gradle.DokkaTaskPartial
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.net.URL
 import java.util.Properties
@@ -29,15 +29,15 @@ plugins {
     id("com.android.application") version "7.3.1" apply false
     id("org.jetbrains.compose") version "1.3.0" apply false
     id("com.vanniktech.maven.publish") version "0.18.0"
-    id("org.jetbrains.dokka") version "1.7.20"
+//    id("org.jetbrains.dokka") version "1.7.20"
     id("me.tylerbwong.gradle.metalava") version "0.2.1" apply false
     id("com.github.ben-manes.versions") version "0.42.0"
 }
 
-tasks.withType<DokkaMultiModuleTask> {
-    outputDirectory.set(rootProject.file("docs/api"))
-    failOnWarning.set(true)
-}
+//tasks.withType<DokkaMultiModuleTask> {
+//    outputDirectory.set(rootProject.file("docs/api"))
+//    failOnWarning.set(true)
+//}
 
 allprojects {
     repositories {
@@ -45,11 +45,29 @@ allprojects {
         google()
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
+    afterEvaluate {
+        publishing {
+            repositories {
+                maven {
+                    name = "GithubPackages"
+                    url = uri("https://maven.pkg.github.com/Qawaz/accompanist")
+                    try {
+                        credentials {
+                            username = (System.getenv("GPR_USER")).toString()
+                            password = (System.getenv("GPR_API_KEY")).toString()
+                        }
+                    }catch(ex : Exception){
+                        ex.printStackTrace()
+                    }
+                }
+            }
+        }
+    }
 }
 
 subprojects {
     apply(plugin = "com.vanniktech.maven.publish")
-    apply(plugin = "org.jetbrains.dokka")
+//    apply(plugin = "org.jetbrains.dokka")
     apply(plugin = "me.tylerbwong.gradle.metalava")
     //apply(plugin = "com.diffplug.spotless")
     //spotless {
@@ -99,38 +117,38 @@ subprojects {
         }
     }
 
-    tasks.named<DokkaTaskPartial>("dokkaHtmlPartial") {
-        dokkaSourceSets.configureEach {
-            reportUndocumented.set(true)
-            skipEmptyPackages.set(true)
-            skipDeprecated.set(true)
-            jdkVersion.set(11)
-
-            // Add Android SDK packages
-            noAndroidSdkLink.set(false)
-
-            // Add samples from :sample module
-            //samples.from(rootProject.file("sample/src/main/java/"))
-
-            // AndroidX + Compose docs
-            externalDocumentationLink {
-                url.set(URL("https://developer.android.com/reference/"))
-                packageListUrl.set(URL("https://developer.android.com/reference/androidx/package-list"))
-            }
-            externalDocumentationLink {
-                url.set(URL("https://developer.android.com/reference/kotlin/"))
-                packageListUrl.set(URL("https://developer.android.com/reference/kotlin/androidx/package-list"))
-            }
-
-            sourceLink {
-                localDirectory.set(project.file("src/commonMain/kotlin"))
-                // URL showing where the source code can be accessed through the web browser
-                remoteUrl.set(URL("https://github.com/Syer10/accompanist/blob/main/${project.name}/src/"))
-                // Suffix which is used to append the line number to the URL. Use #L for GitHub
-                remoteLineSuffix.set("#L")
-            }
-        }
-    }
+//    tasks.named<DokkaTaskPartial>("dokkaHtmlPartial") {
+//        dokkaSourceSets.configureEach {
+//            reportUndocumented.set(true)
+//            skipEmptyPackages.set(true)
+//            skipDeprecated.set(true)
+//            jdkVersion.set(11)
+//
+//            // Add Android SDK packages
+//            noAndroidSdkLink.set(false)
+//
+//            // Add samples from :sample module
+//            //samples.from(rootProject.file("sample/src/main/java/"))
+//
+//            // AndroidX + Compose docs
+//            externalDocumentationLink {
+//                url.set(URL("https://developer.android.com/reference/"))
+//                packageListUrl.set(URL("https://developer.android.com/reference/androidx/package-list"))
+//            }
+//            externalDocumentationLink {
+//                url.set(URL("https://developer.android.com/reference/kotlin/"))
+//                packageListUrl.set(URL("https://developer.android.com/reference/kotlin/androidx/package-list"))
+//            }
+//
+//            sourceLink {
+//                localDirectory.set(project.file("src/commonMain/kotlin"))
+//                // URL showing where the source code can be accessed through the web browser
+//                remoteUrl.set(URL("https://github.com/Syer10/accompanist/blob/main/${project.name}/src/"))
+//                // Suffix which is used to append the line number to the URL. Use #L for GitHub
+//                remoteLineSuffix.set("#L")
+//            }
+//        }
+//    }
 
     plugins.withType<com.android.build.gradle.BasePlugin> {
         configure<com.android.build.gradle.BaseExtension> {
