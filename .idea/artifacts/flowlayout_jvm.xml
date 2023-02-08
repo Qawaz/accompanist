@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="flowlayout-jvm">
+    <output-path>$PROJECT_DIR$/flowlayout/build/libs</output-path>
+    <root id="archive" name="flowlayout-jvm.jar">
+      <element id="module-output" name="accompanist.flowlayout.jvmMain" />
+    </root>
+  </artifact>
+</component>

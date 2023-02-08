@@ -1,5 +1,5 @@
-import com.vanniktech.maven.publish.MavenPublishPluginExtension
-import com.vanniktech.maven.publish.SonatypeHost
+//import com.vanniktech.maven.publish.MavenPublishPluginExtension
+//import com.vanniktech.maven.publish.SonatypeHost
 //import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 //import org.jetbrains.dokka.gradle.DokkaTaskPartial
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -28,7 +28,8 @@ plugins {
     id("com.android.library") version "7.3.1" apply false
     id("com.android.application") version "7.3.1" apply false
     id("org.jetbrains.compose") version "1.3.0" apply false
-    id("com.vanniktech.maven.publish") version "0.18.0"
+    id("maven-publish")
+//    id("com.vanniktech.maven.publish") version "0.18.0"
 //    id("org.jetbrains.dokka") version "1.7.20"
     id("me.tylerbwong.gradle.metalava") version "0.2.1" apply false
     id("com.github.ben-manes.versions") version "0.42.0"
@@ -51,13 +52,9 @@ allprojects {
                 maven {
                     name = "GithubPackages"
                     url = uri("https://maven.pkg.github.com/Qawaz/accompanist")
-                    try {
-                        credentials {
-                            username = (System.getenv("GPR_USER")).toString()
-                            password = (System.getenv("GPR_API_KEY")).toString()
-                        }
-                    }catch(ex : Exception){
-                        ex.printStackTrace()
+                    credentials {
+                        username = (System.getenv("GPR_USER"))!!.toString()
+                        password = (System.getenv("GPR_API_KEY"))!!.toString()
                     }
                 }
             }
@@ -66,7 +63,9 @@ allprojects {
 }
 
 subprojects {
-    apply(plugin = "com.vanniktech.maven.publish")
+
+    apply(plugin = "maven-publish")
+//    apply(plugin = "com.vanniktech.maven.publish")
 //    apply(plugin = "org.jetbrains.dokka")
     apply(plugin = "me.tylerbwong.gradle.metalava")
     //apply(plugin = "com.diffplug.spotless")
@@ -99,23 +98,23 @@ subprojects {
     }
 
     // Read in the signing.properties file if it is exists
-    val signingPropsFile = rootProject.file("release/signing.properties")
-    if (signingPropsFile.exists()) {
-        Properties().apply {
-            signingPropsFile.inputStream().use {
-                load(it)
-            }
-        }.forEach { key1, value1 ->
-            val key = key1.toString()
-            val value = value1.toString()
-            if (key == "signing.secretKeyRingFile") {
-                // If this is the key ring, treat it as a relative path
-                project.ext.set(key, rootProject.file(value).absolutePath)
-            } else {
-                project.ext.set(key, value)
-            }
-        }
-    }
+//    val signingPropsFile = rootProject.file("release/signing.properties")
+//    if (signingPropsFile.exists()) {
+//        Properties().apply {
+//            signingPropsFile.inputStream().use {
+//                load(it)
+//            }
+//        }.forEach { key1, value1 ->
+//            val key = key1.toString()
+//            val value = value1.toString()
+//            if (key == "signing.secretKeyRingFile") {
+//                // If this is the key ring, treat it as a relative path
+//                project.ext.set(key, rootProject.file(value).absolutePath)
+//            } else {
+//                project.ext.set(key, value)
+//            }
+//        }
+//    }
 
 //    tasks.named<DokkaTaskPartial>("dokkaHtmlPartial") {
 //        dokkaSourceSets.configureEach {
