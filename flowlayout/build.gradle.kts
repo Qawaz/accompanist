@@ -24,7 +24,9 @@ plugins {
 
 kotlin {
     explicitApi()
-
+    js(IR) {
+        browser()
+    }
     android {
         publishLibraryVariants("release")
         compilations {
