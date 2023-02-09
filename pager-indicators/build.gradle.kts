@@ -73,7 +73,7 @@ kotlin {
                 api(libs.compose.material.material)
             }
         }
-        val androidTest by getting
+//        val androidTest by getting
 
         val darwinMain by creating {
             dependsOn(commonMain)

@@ -80,7 +80,7 @@ kotlin {
                 api(libs.compose.foundation.foundation)
             }
         }
-        val androidTest by getting
+//        val androidTest by getting
 
         val darwinMain by creating {
             dependsOn(commonMain)

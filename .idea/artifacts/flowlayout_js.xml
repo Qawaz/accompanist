@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="flowlayout-js">
+    <output-path>$PROJECT_DIR$/flowlayout/build/libs</output-path>
+    <root id="archive" name="flowlayout-js.jar" />
+  </artifact>
+</component>
