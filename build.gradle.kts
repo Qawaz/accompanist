@@ -83,6 +83,8 @@ subprojects {
     //}
     //}
 
+    this.version = property("lib.version") as String
+
     tasks.withType<KotlinCompile> {
         kotlinOptions {
             // Treat all Kotlin warnings as errors

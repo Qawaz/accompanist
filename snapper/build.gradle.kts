@@ -43,11 +43,11 @@ kotlin {
     js(IR) {
         browser()
     }
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-    macosX64()
-    macosArm64()
+//    iosX64()
+//    iosArm64()
+//    iosSimulatorArm64()
+//    macosX64()
+//    macosArm64()
 
     sourceSets {
         all {
@@ -82,22 +82,22 @@ kotlin {
         }
 //        val androidTest by getting
 
-        val darwinMain by creating {
-            dependsOn(commonMain)
-        }
-        val darwinTest by creating {
-            dependsOn(commonTest)
-        }
-
-        listOf(
-            "iosX64",
-            "iosArm64",
-            "iosSimulatorArm64",
-            "macosX64",
-            "macosArm64"
-        ).forEach {
-            getByName(it + "Main").dependsOn(darwinMain)
-            getByName(it + "Test").dependsOn(darwinTest)
-        }
+//        val darwinMain by creating {
+//            dependsOn(commonMain)
+//        }
+//        val darwinTest by creating {
+//            dependsOn(commonTest)
+//        }
+//
+//        listOf(
+//            "iosX64",
+//            "iosArm64",
+//            "iosSimulatorArm64",
+//            "macosX64",
+//            "macosArm64"
+//        ).forEach {
+//            getByName(it + "Main").dependsOn(darwinMain)
+//            getByName(it + "Test").dependsOn(darwinTest)
+//        }
     }
 }
