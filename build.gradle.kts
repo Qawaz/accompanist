@@ -83,6 +83,7 @@ subprojects {
     //}
     //}
 
+    this.group = "com.qawaz.accompanist"
     this.version = property("lib.version") as String
 
     tasks.withType<KotlinCompile> {
