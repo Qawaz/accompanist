@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="snapper-jvm-0.25.4">
+    <output-path>$PROJECT_DIR$/snapper/build/libs</output-path>
+    <root id="archive" name="snapper-jvm-0.25.4.jar">
+      <element id="module-output" name="accompanist.snapper.jvmMain" />
+    </root>
+  </artifact>
+</component>

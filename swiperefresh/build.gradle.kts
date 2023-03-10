@@ -52,7 +52,8 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(kotlin("stdlib-common"))
-                api(compose.material)
+                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+                api(compose.material3)
                 implementation(compose("org.jetbrains.compose.ui:ui-util"))
             }
         }
