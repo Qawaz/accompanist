@@ -53,7 +53,6 @@ import com.google.accompanist.snapper.SnapperFlingBehavior
 import com.google.accompanist.snapper.SnapperFlingBehaviorDefaults
 import com.google.accompanist.snapper.SnapperLayoutInfo
 import com.google.accompanist.snapper.rememberSnapperFlingBehavior
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.filter
@@ -237,7 +236,7 @@ public fun HorizontalPager(
         endContentPadding = contentPadding.calculateEndPadding(LayoutDirection.Ltr),
     ),
     key: ((page: Int) -> Any)? = null,
-    // userScrollEnabled: Boolean = true,
+    userScrollEnabled: Boolean = true,
     content: @Composable PagerScope.(page: Int) -> Unit,
 ) {
     Pager(
@@ -251,7 +250,7 @@ public fun HorizontalPager(
         flingBehavior = flingBehavior,
         key = key,
         contentPadding = contentPadding,
-        // userScrollEnabled = userScrollEnabled,
+        userScrollEnabled = userScrollEnabled,
         content = content
     )
 }
@@ -293,7 +292,7 @@ public fun VerticalPager(
         endContentPadding = contentPadding.calculateBottomPadding(),
     ),
     key: ((page: Int) -> Any)? = null,
-    // userScrollEnabled: Boolean = true,
+    userScrollEnabled: Boolean = true,
     content: @Composable PagerScope.(page: Int) -> Unit,
 ) {
     Pager(
@@ -307,7 +306,7 @@ public fun VerticalPager(
         flingBehavior = flingBehavior,
         key = key,
         contentPadding = contentPadding,
-        // userScrollEnabled = userScrollEnabled,
+        userScrollEnabled = userScrollEnabled,
         content = content
     )
 }
@@ -324,7 +323,7 @@ internal fun Pager(
     flingBehavior: FlingBehavior,
     key: ((page: Int) -> Any)?,
     contentPadding: PaddingValues,
-    // userScrollEnabled: Boolean,
+    userScrollEnabled: Boolean,
     verticalAlignment: Alignment.Vertical = Alignment.CenterVertically,
     horizontalAlignment: Alignment.Horizontal = Alignment.CenterHorizontally,
     content: @Composable PagerScope.(page: Int) -> Unit,
@@ -397,7 +396,7 @@ internal fun Pager(
             flingBehavior = flingBehavior,
             reverseLayout = reverseLayout,
             contentPadding = contentPadding,
-            // userScrollEnabled = userScrollEnabled,
+            userScrollEnabled = userScrollEnabled,
             modifier = modifier,
         ) {
             items(
@@ -426,7 +425,7 @@ internal fun Pager(
             flingBehavior = flingBehavior,
             reverseLayout = reverseLayout,
             contentPadding = contentPadding,
-            // userScrollEnabled = userScrollEnabled,
+            userScrollEnabled = userScrollEnabled,
             modifier = modifier,
         ) {
             items(
